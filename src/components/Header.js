@@ -9,29 +9,32 @@ const Header = () => {
         <div className="container flex flex-wrap justify-between items-center mx-auto">
         <div>
         <a href="https://flowbite.com" className="flex items-center">
-            <span className="self-center text-xl font-semibold whitespace-nowrap dark:text-white">Task</span>
+            <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Task</span>
             </a>
         </div>
-        <ul className="flex flex-col mt-4 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium">   
-             <li>
+        <ul className="flex md:mt-0 md:text-sm md:font-medium flex-row">   
                 {
                     navItems.map((menuItem,index)=>{
                         return (
-                          <Link to={menuItem.url}>
-                              <a href="#" className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">{menuItem.name}</a>
+                           <li className='ml-3'>
+                                <Link to={menuItem.url}>
+                              <a href="#" className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 text-xl">
+                                  {menuItem.name}
+                                  </a>
                           </Link>
+                           </li>
                         )
                     })
                 }
-                </li>
         </ul>
        <div>
-            <button class="relative inline-flex items-center justify-center text-sm font-medium text-gray-900 rounded-lg border-[blue] border-2 py-3 px-8 hover:bg-blue-600 hover:text-white">
+            <button className="relative inline-flex items-center justify-center text-sm font-medium text-gray-900 rounded-lg border-[blue] border-2 py-3 px-8 hover:bg-blue-600 hover:text-white">
                     Logout
                 </button>
         </div>
      </div>
  </nav>
+
 
   )
 }

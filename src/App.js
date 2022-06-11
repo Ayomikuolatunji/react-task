@@ -1,12 +1,14 @@
-import React from "react";
-import "./App.css";
-import "./tailwind.generated.css";
 import Header from "./components/Header";
+import {  Route, Routes } from "react-router-dom";
+
 
 function App() {
+
+  
+
   return (
-    <div className="">
-       <Header/>
+    <div className="App">
+       <Header />
     </div>
   );
 }
