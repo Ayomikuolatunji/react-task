@@ -17,11 +17,11 @@ const Header = () => {
    }
 
   return (
-    <nav className="bg-white border-gray-200 px-2 sm:px-4 py-8 rounded dark:bg-gray-800">
+    <nav className="bg-white border-gray-200 px-2 sm:px-4 py-8 rounded">
         <div className="container flex flex-wrap justify-between items-center mx-auto">
         <div>
         <a href="https://flowbite.com" className="flex items-center">
-            <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Task</span>
+            <span className="self-center text-2xl font-semibold whitespace-nowrap">Task</span>
             </a>
         </div>
         <ul className="flex md:mt-0 md:text-sm md:font-medium flex-row">   

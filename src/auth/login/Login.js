@@ -29,7 +29,7 @@ const Login = () => {
 
   return (
     <div className='flex justify-center items-center w-full h-[100vh]'>
-         <form className="container sm:w-[400px]  mx-auto border-2 border-gray-200 flex justify-center items-center flex-col shadow-xl"  onSubmit={handleSubmit}>
+         <form method='post' className="container w-[400px]  mx-auto border-2 border-gray-200 flex justify-center items-center flex-col shadow-xl"  onSubmit={handleSubmit}>
             <div className="header border-b-2 w-full text-center p-3">
                <div className='flex justify-center items-center'>
                    <VscAccount className='text-3xl text-blue-700'/>
@@ -37,7 +37,7 @@ const Login = () => {
                     </span>
                </div>
             </div>
-             <div className="email-container w-full p-3 mt-3">
+             <div className="email-container w-full p-3 mt-6">
                     <input 
                     name='email'
                     type="email" 
@@ -47,7 +47,7 @@ const Login = () => {
                     onChange={(e) => setEmail(e.target.value)}
                     />
              </div>
-            <div className="password-container w-full p-2 mt-3">
+            <div className="password-container w-full p-2 mt-6">
                     <input type="password" 
                     name='password'
                     placeholder="Enter your password"
