@@ -3,7 +3,7 @@ import axios from 'axios';
 
 
 
-const loginUser=createAsyncThunk('auth-slice/loginUser',async(data,{rejectWithValue})=>{
+export const loginUser=createAsyncThunk('auth-slice/loginUser',async({data, thunkAPI})=>{
      try {
        const response=await axios('https://stage.api.sloovi.com/login', {
             method: 'POST',
@@ -18,7 +18,7 @@ const loginUser=createAsyncThunk('auth-slice/loginUser',async(data,{rejectWithVa
         })
         return response.data;
      } catch (error) {
-         
+        return thunkAPI.rejectWithValue('something went wrong');
      }
 })
 
@@ -38,12 +38,6 @@ const authSlice = createSlice({
             state.isAuthenticated = false;
             state.user = null;
             state.token = null;
-        },
-        setError: (state, action) => {
-            state.error = action.payload;
-        },
-        setLoading: (state, action) => {
-            state.loading = action.payload;
         }
     },
     extraReducers: {
@@ -65,4 +59,6 @@ const authSlice = createSlice({
 
 
 export const {login,logout, setError,setLoading} = authSlice.actions;
+
+export default authSlice.reducer;
 

@@ -1,42 +1,19 @@
-import axios from 'axios';
 import React from 'react'
 import {VscAccount} from 'react-icons/vsc'
+import { useDispatch, useSelector } from 'react-redux';
+import { loginUser } from '../../redux/auth-slice/authSlice';
 
 const Login = () => {
-
-
+    const dispatch = useDispatch();
     const [email, setEmail] = React.useState('');
     const [password, setPassword] = React.useState('');
-    const [error, setError] = React.useState('');
-    const [loading, setLoading] = React.useState(false);
+    const {user,token,error,loading} = useSelector(state => state.auth);
 
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        setLoading(true);
-        setError('');
-        axios('https://stage.api.sloovi.com/login', {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            data:JSON.stringify({
-                email,
-                password
-            }),
-        })
-      .then(data => {
-            if (data.error) {
-                setError(data.error);
-            } else {
-                localStorage.setItem('token', data.token);
-            }
-            console.log(data)
-      })
-     .catch(err => {
-        console.log(err);
-     })
+        console.log(user,token,error,loading);
+        dispatch(loginUser({email,password}));
     }
 
    
