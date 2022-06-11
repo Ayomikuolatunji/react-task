@@ -1,9 +1,21 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { navItems } from '../helpers/navtItems'
+import { logout } from '../redux/auth-slice/authSlice'
 
 const Header = () => {
+   const dispatch = useDispatch();
+   const isAuthenticated = useSelector(state => state.auth.isAuthenticated)
+
+
+   const logoutUser=()=>{
+    if(isAuthenticated){
+        dispatch(logout());
+    }
+   }
+
   return (
     <nav className="bg-white border-gray-200 px-2 sm:px-4 py-8 rounded dark:bg-gray-800">
         <div className="container flex flex-wrap justify-between items-center mx-auto">
@@ -28,9 +40,10 @@ const Header = () => {
                 }
         </ul>
        <div>
-            <button className="relative inline-flex items-center justify-center text-sm font-medium text-gray-900 rounded-lg border-[blue] border-2 py-3 px-8 hover:bg-blue-600 hover:text-white">
+            <button className="relative inline-flex items-center justify-center text-sm font-medium text-gray-900 rounded-lg border-[blue] border-2 py-3 px-8 hover:bg-blue-600 hover:text-white"
+            onClick={logoutUser}>
                     Logout
-                </button>
+            </button>
         </div>
      </div>
  </nav>

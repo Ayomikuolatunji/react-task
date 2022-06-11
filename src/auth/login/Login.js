@@ -1,26 +1,35 @@
-import React, { useCallback} from 'react'
+import React, { useCallback, useState} from 'react'
 import {VscAccount} from 'react-icons/vsc'
 import { useDispatch, useSelector } from 'react-redux';
-import { loginUser } from '../../redux/auth-slice/authSlice';
+import { loginUser, resetMessageState } from '../../redux/auth-slice/authSlice';
 
 const Login = () => {
     const dispatch = useDispatch();
-    const [email, setEmail] = React.useState('');
-    const [password, setPassword] = React.useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
     const {loading,message} = useSelector(state => state.auth);
    
 
     const handleSubmit =useCallback((e)=>{
+        dispatch(resetMessageState());
+        // validation inputs and send data to server
+        if(!email){
+            alert('Please enter email');
+            return;
+        }
+        if(!password){
+            alert('Please enter password');
+            return;
+        }
         e.preventDefault();
         dispatch(loginUser({email,password}));
     },[email,password,dispatch]);
     
 
 
-
   return (
     <div className='flex justify-center items-center w-full h-[100vh]'>
-         <form className="container sm:w-[500px] w-[400px] mx-auto border-2 border-gray-200 flex justify-center items-center flex-col shadow-xl"  onSubmit={handleSubmit}>
+         <form className="container sm:w-[400px]  mx-auto border-2 border-gray-200 flex justify-center items-center flex-col shadow-xl"  onSubmit={handleSubmit}>
             <div className="header border-b-2 w-full text-center p-3">
                <div className='flex justify-center items-center'>
                    <VscAccount className='text-3xl text-blue-700'/>

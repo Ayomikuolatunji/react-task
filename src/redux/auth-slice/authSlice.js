@@ -27,6 +27,7 @@ export const loginUser=createAsyncThunk('auth/loginUser',async(data, thunkAPI)=>
 const authSlice = createSlice({
     name: 'auth',
     initialState: {
+        isAuthenticated: false,
         message:null,
         user_id: null,
         token: null,
@@ -36,8 +37,14 @@ const authSlice = createSlice({
     reducers: {
         logout: (state) => {
             state.isAuthenticated = false;
-            state.user = null;
+            state.user_id = null;
             state.token = null;
+            state.message = null;
+            state.error = null;
+            state.loading = false;
+        },
+         resetMessageState:(state)=>{
+            state.message="";
         }
     },
     extraReducers: {
@@ -45,7 +52,7 @@ const authSlice = createSlice({
             state.loading = true;
         },
         [loginUser.fulfilled]: (state, action) => {
-            console.log(action.payload);
+            state.isAuthenticated = true;
             state.loading = false;
             state.message=action.payload.message;
             state.user_id = action.payload.results.user_id;
@@ -60,7 +67,7 @@ const authSlice = createSlice({
 
 
 
-export const {logout} = authSlice.actions;
+export const {logout,resetMessageState} = authSlice.actions;
 
 export default authSlice.reducer;
 
