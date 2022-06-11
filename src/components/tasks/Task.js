@@ -8,8 +8,8 @@ const Task = () => {
 
   return (
     <div>
-         <div className="task-header-plus-btn">
-            <div className="task-header">
+         <div className="task-header-plus-btn w-[300px] border-[0.5px] border-[lightgray] shadow-xl">
+            <div className="task-header flex justify-between">
                 <div className="task-number">
                     <span className="task-number-text">
                        TASK
