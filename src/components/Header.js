@@ -16,12 +16,12 @@ const Header = () => {
                 {
                     navItems.map((menuItem,index)=>{
                         return (
-                           <li className='ml-3'>
+                           <li className='ml-3' key={index}>
                                 <Link to={menuItem.url}>
-                              <a href="#" className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 text-xl">
-                                  {menuItem.name}
-                                  </a>
-                          </Link>
+                                    <span href="#" className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 text-xl">
+                                       {menuItem.name}
+                                     </span>
+                                </Link>
                            </li>
                         )
                     })

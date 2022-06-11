@@ -1,5 +1,6 @@
 import Header from "./components/Header";
 import {  Route, Routes } from "react-router-dom";
+import Login from "./auth/login/Login";
 
 
 function App() {
@@ -8,7 +9,8 @@ function App() {
 
   return (
     <div className="App">
-       <Header />
+       {/* <Header /> */}
+       <Login/>
     </div>
   );
 }
