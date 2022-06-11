@@ -3,6 +3,7 @@ import { configureStore,combineReducers} from '@reduxjs/toolkit'
 import { persistStore, persistReducer,FLUSH, REHYDRATE,PAUSE,PERSIST,PURGE,REGISTER,} from 'redux-persist'
 import storage from 'redux-persist/lib/storage' // defaults to localStorage for web
 import authSlice from './auth-slice/authSlice';
+import userDetailsSlice from './user-slice/userDetailsSlice';
 
 
 
@@ -13,6 +14,7 @@ const persistConfig = {
 // first reducer setup for persist storage blacklisting country and companies
 const rootReducer= combineReducers({
     auth:authSlice,
+    userDetail:userDetailsSlice
 })
 
 // persist store
