@@ -3,7 +3,7 @@ import axios from 'axios';
 
 
 
-export const loginUser=createAsyncThunk('auth-slice/loginUser',async({data, thunkAPI})=>{
+export const loginUser=createAsyncThunk('auth/loginUser',async(data, thunkAPI)=>{
      try {
        const response=await axios('https://stage.api.sloovi.com/login', {
             method: 'POST',
@@ -27,8 +27,8 @@ export const loginUser=createAsyncThunk('auth-slice/loginUser',async({data, thun
 const authSlice = createSlice({
     name: 'auth',
     initialState: {
-        isAuthenticated: false,
-        user: null,
+        message:null,
+        user_id: null,
         token: null,
         error: null,
         loading: false
@@ -41,13 +41,15 @@ const authSlice = createSlice({
         }
     },
     extraReducers: {
-        [loginUser.pending]: (state, action) => {
+        [loginUser.pending]: (state) => {
             state.loading = true;
         },
         [loginUser.fulfilled]: (state, action) => {
+            console.log(action.payload);
             state.loading = false;
-            state.user = action.payload.user;
-            state.token = action.payload.token;
+            state.message=action.payload.message;
+            state.user_id = action.payload.results.user_id;
+            state.token = action.payload.results.token;
         },
         [loginUser.rejected]: (state, action) => {
             state.loading = false;
@@ -58,7 +60,7 @@ const authSlice = createSlice({
 
 
 
-export const {login,logout, setError,setLoading} = authSlice.actions;
+export const {logout} = authSlice.actions;
 
 export default authSlice.reducer;
 
