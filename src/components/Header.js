@@ -2,6 +2,7 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { logout } from '../redux/auth-slice/authSlice'
+import { clearUserDetails } from '../redux/user-slice/userDetailsSlice'
 import UserDetails from './UserDetails'
 
 const Header = () => {
@@ -11,7 +12,10 @@ const Header = () => {
 
    const logoutUser=()=>{
     if(isAuthenticated){
+        // clear auth data from redux store
         dispatch(logout());
+        // clear user details from redux store
+        dispatch(clearUserDetails())
     }
    }
 

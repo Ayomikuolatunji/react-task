@@ -3,6 +3,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Login from "./auth/login/Login";
 import Header from "./components/Header";
+import Task from "./components/Task";
 import { fetchUserDetails } from "./redux/user-slice/userDetailsSlice";
 
 
@@ -26,6 +27,7 @@ function App() {
   return (
     <div className="App">
        <Header />
+       <Task/>
     </div>
   );
 }
