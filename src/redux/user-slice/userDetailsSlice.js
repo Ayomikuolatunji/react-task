@@ -15,11 +15,13 @@ export const fetchUserDetails = createAsyncThunk("userDetails/fetchUserDetails",
                 "Accept":"application/json"
             }
         });
+        // fetch user details from api
         const getUser=response.data.results.data;
         let userDetails={};
+        // loop through user details and assign to userDetails object
           getUser.forEach(user=>{
             if(user.user_id===user_id){
-                return userDetails=user;
+                return userDetails.user=user;
             }
         })
         return userDetails;                  
