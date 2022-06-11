@@ -3,7 +3,7 @@ import React from 'react'
 
 const Header = () => {
   return (
-    <nav className="bg-white border-gray-200 px-2 sm:px-4 py-2.5 rounded dark:bg-gray-800">
+    <nav className="bg-white border-gray-200 px-2 sm:px-4 py-8 rounded dark:bg-gray-800">
         <div className="container flex flex-wrap justify-between items-center mx-auto">
         <div>
         <a href="https://flowbite.com" className="flex items-center">
@@ -22,7 +22,9 @@ const Header = () => {
                 </li>
             </ul>
             <div>
-                <button>Logout</button>
+            <button class="relative inline-flex items-center justify-center text-sm font-medium text-gray-900 rounded-lg border-blue-500 border-2 p-3 hover:bg-blue-500 hover:text-white">
+                    Logout
+                </button>
             </div>
         </div>
      </nav>
