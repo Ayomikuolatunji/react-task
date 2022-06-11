@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { navItems } from '../helpers/navtItems'
 import { logout } from '../redux/auth-slice/authSlice'
+import UserDetails from './UserDetails'
 
 const Header = () => {
    const dispatch = useDispatch();
@@ -38,6 +39,8 @@ const Header = () => {
                         )
                     })
                 }
+               {/* user detail dropdown */}
+               <UserDetails/>
         </ul>
        <div>
             <button className="relative inline-flex items-center justify-center text-sm font-medium text-gray-900 rounded-lg border-[blue] border-2 py-3 px-8 hover:bg-blue-600 hover:text-white"
