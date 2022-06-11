@@ -6,10 +6,10 @@ const UserDetails = () => {
    const [dropdownOpen,setDropdownOpen] = useState(false);
    const userDetails = useSelector(state => state.userDetails.userDetails)
     
-     console.log(userDetails?.user)
+
 
   return (
-    <li className=''>
+    <div>
         <div href="#" className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 text-xl cursor-pointer" onClick={()=>setDropdownOpen(!dropdownOpen)}>
             <span className="text-gray-900">
                 User Details
@@ -37,7 +37,7 @@ const UserDetails = () => {
                 </div>
             ) 
             } 
-    </li>
+    </div>
   )
 }
 
