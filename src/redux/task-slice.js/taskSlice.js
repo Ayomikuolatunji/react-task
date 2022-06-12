@@ -4,30 +4,33 @@ import axios from "axios"
 
 
 export const createTask=createAsyncThunk('taskSlice/createTask',async(task,thunkAPI)=>{
-    try{
-        const {company_id,token,user_id} = thunkAPI.getState().auth;
-        const response=await axios(`https://stage.api.sloovi.com/task/lead_465c14d0e99e4972b6b21ffecf3dd691?company_id=${company_id}`,{
-            method:'POST',
-            headers:{
-                'Content-Type':'application/json',
-                'Authorization':`Bearer ${token}`
-            },
-              data:JSON.stringify(
-                {
-                 assigned_user: user_id, 
-                 task_date:task.task_date,
-                 task_time:task.task_time,
-                 time_zone:task.time_zone,
-                 task_msg: task.task_desceiption,
-                }
-              )
-        })
-        const data=await response.json()
-        return data
-    }
-    catch(error){
-        return thunkAPI.rejectWithValue(error)
-    }
+    console.log(task)
+    // try{
+    //     const {company_id,token,user_id} = thunkAPI.getState().auth;
+    //     const response=await axios(`https://stage.api.sloovi.com/task/lead_465c14d0e99e4972b6b21ffecf3dd691?company_id=${company_id}`,{
+    //         method:'POST',
+    //         headers:{
+    //             'Content-Type':'application/json',
+    //             'Authorization':`Bearer ${token}`
+    //         },
+    //           data:JSON.stringify(
+    //             {
+    //              assigned_user: user_id, 
+    //              task_date:task.taskDate,
+    //              task_time:task.taskTime,
+    //             //  iscompleted should be random number between 0 and 1
+    //              is_completed:Math.floor(Math.random()*2),
+    //              time_zone:task.timeZone,
+    //              task_msg: task.taskDescription,
+    //             }
+    //           )
+    //     })
+    //     const data=await response.json()
+    //     return data
+    // }
+    // catch(error){
+    //     return thunkAPI.rejectWithValue(error)
+    // }
 })
 
 
@@ -36,30 +39,23 @@ export const createTask=createAsyncThunk('taskSlice/createTask',async(task,thunk
 const taskSlice = createSlice({
     name: "task",
     initialState: {
-        taskDescription: "",
-        taskDate: "",
-        taskTime: "",
-        taskAssignee: "",
-        taskList: [],
         taskSucessMsg:"",
+        isloading:false,
     },
     reducers: {
-        setTaskDescription: (state, action) => {
-            state.taskDescription = action.payload;
+         
+    },
+    extraReducers: {
+        [createTask.fulfilled]: (state, action) => {
+            state.isloading=false
         },
-        setTaskDate: (state, action) => {
-            state.taskDate = action.payload;
+        [createTask.rejected]: (state, action) => {
+            state.taskSucessMsg = action.payload
+            state.isloading=false
         },
-        setTaskTime: (state, action) => {
-            state.taskTime = action.payload;
-        },
-        setTaskAssignee: (state, action) => {
-            state.taskAssignee = action.payload;
-        },
-        setTaskList: (state, action) => {
-            state.taskList = action.payload;
+        [createTask.pending]: (state, action) => {
+            state.isloading = true
         }
-        
     }
 
 })
