@@ -93,6 +93,7 @@ export const deleteTask=createAsyncThunk('taskSlice/deleteTask',async(task,thunk
                 'Authorization':`Bearer ${token}`
             }
         })
+        console.log(response.data)
         return response.data;
     }catch(error){
         return thunkAPI.rejectWithValue(error)
@@ -108,6 +109,7 @@ const taskSlice = createSlice({
         isloading:false,
         singleTask:[],
         allTasks:[],
+        deleteMsg:""
     },
     reducers: {
          setTaskOpen: (state, action) => {
@@ -141,6 +143,11 @@ const taskSlice = createSlice({
         },
         [getAllTasks.pending]: (state, action) => {
             
+        },
+        // deleteTask message
+        [deleteTask.fulfilled]: (state, action) => {
+            state.deleteMsg = action.payload.message
+            state.isloading=false
         }
     }
 

@@ -1,7 +1,7 @@
 import React,{useState} from 'react'
 import {BsFillTrashFill} from 'react-icons/bs'
 import { useDispatch, useSelector } from 'react-redux'
-import { editTaskFunction } from '../../redux/task-slice.js/taskSlice'
+import { deleteTask, editTaskFunction } from '../../redux/task-slice.js/taskSlice'
 
 
 
@@ -32,6 +32,14 @@ const EditTask = ({task,changeTab, index}) => {
             timeTime:getCurrentTimeZone(),
             taskAssignee:taskAssignee,
             timeZone: getCurrentTimeZone()
+        }))
+    }
+
+
+    const deleteTaskHandler = () => {
+        changeTab(index)
+        disptach(deleteTask({
+            task_id:task.results.id
         }))
     }
 
@@ -86,7 +94,9 @@ const EditTask = ({task,changeTab, index}) => {
         </div>
         <div className="submit-and-cancel-task w-full flex justify-between p-3">
             <button>
-                <BsFillTrashFill className='text-gray-500 text-2xl'/>
+                <BsFillTrashFill className='text-gray-500 text-2xl'
+                onClick={deleteTaskHandler}
+                />
             </button>
             <div>
             <button className="cancel-task-btn mr-3 px-5 py-2  text-gray-500"
