@@ -1,15 +1,15 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {AiOutlinePlus} from "react-icons/ai";
 import { useDispatch } from 'react-redux';
 import { createTask } from '../../redux/task-slice.js/taskSlice';
 
 const Task = () => {
    const  dispatch=useDispatch()
-   const [openTask, setOpenTask] = React.useState(false);
-    const [taskDescription, setTaskDescription] = React.useState("");
-    const [taskDate, setTaskDate] = React.useState("");
-    const [taskTime, setTaskTime] = React.useState("");
-    const [taskAssignee, setTaskAssignee] = React.useState("");
+   const [openTask, setOpenTask] = useState(false);
+    const [taskDescription, setTaskDescription] = useState("");
+    const [taskDate, setTaskDate] = useState("");
+    const [taskTime, setTaskTime] = useState("");
+    const [taskAssignee, setTaskAssignee] = useState("");
 
     const getCurrentTimeZone = () => {
        return (Date.now()-(Date.now()/1000/60/60/24|0)*24*60*60*1000)/1000
@@ -33,7 +33,7 @@ const Task = () => {
             timeTime: getCurrentTimeFormatAmPm(taskTime),
             taskAssignee: taskAssignee, 
             is_completed:Math.floor(Math.random()*2),
-            currentTimeZoneInSeconds:  Math.floor(getCurrentTimeZone())
+            timeZone:  Math.floor(getCurrentTimeZone())
         }))
    }
 
