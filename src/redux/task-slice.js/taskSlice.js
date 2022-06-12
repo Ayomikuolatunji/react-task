@@ -7,26 +7,26 @@ import axios from "axios"
 export const createTask=createAsyncThunk('taskSlice/createTask',async(task,thunkAPI)=>{
     try{
         const {company_id,token,user_id} = thunkAPI.getState().auth;
-        // const response=await axios(`https://stage.api.sloovi.com/task/lead_465c14d0e99e4972b6b21ffecf3dd691?company_id=${company_id}`,{
-        //     method:'POST',
-        //     headers:{
-        //         'Content-Type':'application/json',
-        //         'Authorization':`Bearer ${token}`
-        //     },
-        //       data:JSON.stringify(
-        //         {
-        //          assigned_user: user_id, 
-        //          task_date:task.taskDate,
-        //          task_time:task.taskTime,
-        //         //  iscompleted should be random number between 0 and 1
-        //          is_completed:task.is_completed,
-        //          time_zone:task.timeZone,
-        //          task_msg: task.taskDescription,
-        //         }
-        //       )
-        // })
+        const response=await axios(`https://stage.api.sloovi.com/task/lead_465c14d0e99e4972b6b21ffecf3dd691?company_id=${company_id}`,{
+            method:'POST',
+            headers:{
+                'Content-Type':'application/json',
+                'Authorization':`Bearer ${token}`
+            },
+              data:JSON.stringify(
+                {
+                 assigned_user: user_id, 
+                 task_date:task.taskDate,
+                 task_time:task.taskTime,
+                //  iscompleted should be random number between 0 and 1
+                 is_completed:task.is_completed,
+                 time_zone:task.timeZone,
+                 task_msg: task.taskDescription,
+                }
+              )
+        })
 
-        return "response.data;"
+        return response.data;
     }
     catch(error){
         return thunkAPI.rejectWithValue(error)
@@ -47,6 +47,9 @@ const taskSlice = createSlice({
     reducers: {
          setTaskOpen: (state, action) => {
             state.isTaskOpen = action.payload;
+         },
+         clearTask:(state)=>{
+            state.singleTask=[];
          }
     },
     extraReducers: {
@@ -56,7 +59,7 @@ const taskSlice = createSlice({
             state.isloading=false
             state.isTaskOpen=false
             // create object task and spread inside singleTask
-            state.singleTask=[...state.singleTask,"action.payload"]
+            state.singleTask=[...state.singleTask,action.payload]
         },
         [createTask.rejected]: (state, action) => {
              state.isloading=false
@@ -68,6 +71,6 @@ const taskSlice = createSlice({
 
 })
 
-export const {setTaskOpen} = taskSlice.actions;
+export const {setTaskOpen,clearTask} = taskSlice.actions;
 
 export default taskSlice.reducer

@@ -2,6 +2,7 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { logout } from '../redux/auth-slice/authSlice'
+import { clearTask } from '../redux/task-slice.js/taskSlice'
 import { clearUserDetails } from '../redux/user-slice/userDetailsSlice'
 import UserDetails from './UserDetails'
 
@@ -16,6 +17,8 @@ const Header = () => {
         dispatch(logout());
         // clear user details from redux store
         dispatch(clearUserDetails())
+        // clear tasks from redux store
+        dispatch(clearTask())
     }
    }
 

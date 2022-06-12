@@ -1,10 +1,9 @@
 import React, { useEffect } from "react";
-import { AiOutlinePlus } from "react-icons/ai";
 // import {  Route, Routes } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import Login from "./auth/login/Login";
 import Header from "./components/Header";
-import Task from "./components/tasks/Task";
+import Tasks from "./components/tasks/Tasks";
 import { fetchUserDetails } from "./redux/user-slice/userDetailsSlice";
 
 
@@ -20,15 +19,15 @@ function App() {
     }
   },[dispatch,isAuthenticated]);
 
-  // if(!isAuthenticated){
-  //    return  <Login/>
-  // }
+  if(!isAuthenticated){
+     return  <Login/>
+  }
   
 
   return (
     <div className="App">
        <Header />
-       <Task/>
+       <Tasks/>
     </div>
   );
 }
