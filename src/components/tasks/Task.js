@@ -8,15 +8,20 @@ const Task = () => {
 
   return (
     <div>
-         <div className="task-header-plus-btn w-[300px] border-[0.5px] border-[lightgray] shadow-xl">
-            <div className="task-header flex justify-between">
-                <div className="task-number">
+         <div className='text-center mt-5 mb-16'>
+            <h1>Create New Task</h1>
+         </div>
+         <div className="task-header-plus-btn w-[350px] border-[0.5px] border-[lightgray] shadow-xl mx-auto">
+            <div className="task-header flex justify-between border-b-2">
+                <div className="task-number p-3">
                     <span className="task-number-text">
                        TASK
                     </span>
-                    <span>1</span>
+                    <span className='text-xl ml-3'>
+                        1
+                    </span>
                 </div>
-                <div className="plus">
+                <div className="plus border-l-2 p-3 flex justify-center items-center">
                     <AiOutlinePlus/>
                 </div>
              </div>
