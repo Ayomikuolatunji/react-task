@@ -84,6 +84,7 @@ const Tasks = () => {
                 handleOpenTask={handleOpenTask}
                 isloading={isloading}
                 dispatch={dispatch}
+                setTaskOpen={setTaskOpen}
             /> }
              {/* display all  */}
        </div>
