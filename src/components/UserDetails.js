@@ -7,7 +7,6 @@ const UserDetails = () => {
    const userDetails = useSelector(state => state.userDetails.userDetails)
     
 
-
   return (
     <div>
         <div href="#" className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 text-xl cursor-pointer" onClick={()=>setDropdownOpen(!dropdownOpen)}>
@@ -16,7 +15,7 @@ const UserDetails = () => {
             </span>
          </div> 
             {dropdownOpen && (
-                <div className="absolute mt-1 w-[300px] mx-auto h-[auto] left-0 right-0 shadow-xl z-[999]">
+                <div className="absolute mt-1 w-[300px] mx-auto h-[auto] left-0 right-0 shadow-xl z-[999] bg-white">
                    <div className="px-4 py-3 text-sm text-gray-900">
                          <div>
                               <span className="text-gray-900">

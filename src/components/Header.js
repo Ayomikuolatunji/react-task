@@ -9,7 +9,7 @@ const Header = () => {
    const dispatch = useDispatch();
    const isAuthenticated = useSelector(state => state.auth.isAuthenticated)
 
-
+    
    const logoutUser=()=>{
     if(isAuthenticated){
         // clear auth data from redux store

@@ -25,12 +25,17 @@ const Task = () => {
                     <AiOutlinePlus/>
                 </div>
              </div>
-             <div className="task-form">
-                <div className="task-description">
-                    <label htmlFor="task descript">
+             <div className="task-form w-full bg-blue-200">
+                <div className="task-description w-full flex flex-col justify-center p-2  mt-4">
+                    <label htmlFor="task description">
                         Task Description
                     </label>
-                    <input type="text" id="task-descript" placeholder="Enter task description"/>
+                    <input 
+                      type="text" 
+                      id="task-description" 
+                      placeholder="Enter task description"
+                      className='w-full border-2 mt-3 p-2.5'
+                    />
                 </div>
                 <div className="task-date-and-time">
                     <div className="task-date">
