@@ -12,6 +12,9 @@ const EditTask = ({task,changeTab, index}) => {
     const [editDate,setEditDate]=useState("")
     const [editTime,setEdit]=useState("")
     
+    const getCurrentTimeZone = () => {
+        return Math.floor( (Date.now()-(Date.now()/1000/60/60/24|0)*24*60*60*1000)/1000)
+     }
 
 
 
@@ -25,9 +28,10 @@ const EditTask = ({task,changeTab, index}) => {
             task_id:task.results.id,
             task_msg:editDesc,
             task_date:editDate,
-            timeTime:editTime,
+            //convert provided time to seconds
+            timeTime:getCurrentTimeZone(),
             taskAssignee:taskAssignee,
-            timeZone: task.results.timeZone
+            timeZone: getCurrentTimeZone()
         }))
     }
 

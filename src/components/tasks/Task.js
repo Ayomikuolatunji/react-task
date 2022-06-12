@@ -22,7 +22,7 @@ const user_picture=useSelector(state=>state.auth.user_picture)
                     <h1 className='font-bold font-serif'>Follow up</h1>
                         <h3 className='text-yellow-600'>
                             {
-                               new Date(task.results.task_date).toLocaleDateString()
+                               new Date(task?.results?.task_date).toLocaleDateString()
                             }
                         </h3>
                     </div>

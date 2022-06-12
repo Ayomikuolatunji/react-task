@@ -3,6 +3,26 @@ import axios from "axios"
 
 
 
+export const getAllTasks = createAsyncThunk("task/getAllTasks", 
+async (_, thunkAPI) => {
+    const {company_id,token} = thunkAPI.getState().auth;
+    try {
+        const response = await axios.get(`https://stage.api.sloovi.com/task/lead_465c14d0e99e4972b6b21ffecf3dd691?company_id=${company_id}`,{
+            method:"GET",
+            headers:{
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',  
+                "Authorization":`Bearer ${token}`
+            }
+        })
+        return response.data
+    } catch (error) {
+        console.log(error);
+         return thunkAPI.rejectWithValue(error)
+    }
+})
+
+
 
 export const createTask=createAsyncThunk('taskSlice/createTask',async(task,thunkAPI)=>{
     try{
@@ -39,7 +59,7 @@ export const editTaskFunction=createAsyncThunk('taskSlice/editTask',async(task,t
     try{
         console.log(task)
         const {company_id,token,user_id} = thunkAPI.getState().auth;
-        const response=await axios(`https://stage.api.sloovi.com/task/${task.task_id}?company_id=${company_id}`,{
+        const response=await axios(`https://stage.api.sloovi.com/task/lead_465c14d0e99e4972b6b21ffecf3dd691/${task.task_id}?company_id=${company_id}`,{
             method:'PUT',
             headers:{
                 'Content-Type':'application/json',
@@ -55,7 +75,24 @@ export const editTaskFunction=createAsyncThunk('taskSlice/editTask',async(task,t
                  task_msg: task.task_msg,
             })
         })
+        console.log(response.data)
+        return response.data;
+    }catch(error){
+        return thunkAPI.rejectWithValue(error)
+    }
+})
 
+
+export const deleteTask=createAsyncThunk('taskSlice/deleteTask',async(task,thunkAPI)=>{
+    try{
+        const {company_id,token} = thunkAPI.getState().auth;
+        const response=await axios(`https://stage.api.sloovi.com/task/lead_465c14d0e99e4972b6b21ffecf3dd691/${task.task_id}?company_id=${company_id}`,{
+            method:'DELETE',
+            headers:{
+                'Content-Type':'application/json',
+                'Authorization':`Bearer ${token}`
+            }
+        })
         return response.data;
     }catch(error){
         return thunkAPI.rejectWithValue(error)
@@ -69,7 +106,8 @@ const taskSlice = createSlice({
         isTaskOpen:false,
         taskSucessMsg:"",
         isloading:false,
-        singleTask:[]
+        singleTask:[],
+        allTasks:[],
     },
     reducers: {
          setTaskOpen: (state, action) => {
@@ -87,11 +125,22 @@ const taskSlice = createSlice({
             // create object task and spread inside singleTask
             state.singleTask=[...state.singleTask,action.payload]
         },
-        [createTask.rejected]: (state, action) => {
+        [createTask.rejected]: (state) => {
              state.isloading=false
         },
-        [createTask.pending]: (state, action) => {
+        [createTask.pending]: (state) => {
             state.isloading = true
+        },
+         // dispatch(getAllTasks())
+         [getAllTasks.fulfilled]: (state, action) => {
+            state.allTasks = action.payload
+            state.isloading=false
+        },
+        [getAllTasks.rejected]: (state, action) => {
+            state.isloading=false
+        },
+        [getAllTasks.pending]: (state, action) => {
+            
         }
     }
 
