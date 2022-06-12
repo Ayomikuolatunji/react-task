@@ -9,7 +9,8 @@ export const loginUser=createAsyncThunk('auth/loginUser',async(data, thunkAPI)=>
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                
             },
             data:JSON.stringify({
                 email:data.email,

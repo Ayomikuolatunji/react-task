@@ -16,25 +16,25 @@ const AllTask = () => {
   return (
     <div>
         <div>
-           {/* {
+           {
                 allTasks.map((task,index)=>{
-                    return <div key={index}>
+                    return <div>
                          <div className="left flex">
-                                <img src={user_picture} 
-                                className="rounded-full w-12 h-12"
-                                alt="profile_picture" 
-                                />  
-                                <div>
-                                        <h1>Follow up</h1>
-                                    
-                                </div>
+                            <img src={user_picture} 
+                            className="rounded-full w-12 h-12"
+                            alt="profile_picture" 
+                            />  
+                            <div>
+                                    <h1>Follow up</h1>
+                                
                             </div>
-                            <div className="right">
+                        </div>
+                        <div className="right">
 
-                            </div>
+                        </div>
                     </div>
                 })
-           } */}
+           }
         </div>
     </div>
   )
