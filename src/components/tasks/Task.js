@@ -2,7 +2,7 @@ import React from 'react'
 import {AiOutlinePlus} from "react-icons/ai";
 
 const Task = () => {
-
+   const [openTask, setOpenTask] = React.useState(false);
 
 
 
@@ -22,10 +22,13 @@ const Task = () => {
                     </span>
                 </div>
                 <div className="plus border-l-2 p-3 flex justify-center items-center">
-                    <AiOutlinePlus/>
+                    <AiOutlinePlus
+                        className='text-xl'
+                        onClick={()=>setOpenTask(!openTask)}
+                    />
                 </div>
              </div>
-             <div className="task-form w-full bg-blue-200">
+            {openTask && <div className="task-form w-full bg-blue-200">
                 <div className="task-description w-full flex flex-col justify-center p-2  mt-4">
                     <label htmlFor="task description">
                         Task Description
@@ -65,7 +68,15 @@ const Task = () => {
                     className='w-full border-2 mt-3 p-2.5'
                     />
                 </div>
-             </div>
+                <div className="submit-and-cancel-task w-full flex justify-end p-3">
+                    <button className="cancel-task-btn mr-3 px-5 py-2  text-gray-500">
+                      Cancel
+                    </button>
+                    <button className="submit-task-btn mr-3 px-5 py-2 bg-green-700 text-white">
+                        Submit
+                    </button>
+                 </div>
+             </div>}
          </div>
     </div>
   )
