@@ -30,6 +30,7 @@ export const createTask=createAsyncThunk('taskSlice/createTask',async(task,thunk
         const response=await axios(`https://stage.api.sloovi.com/task/lead_465c14d0e99e4972b6b21ffecf3dd691?company_id=${company_id}`,{
             method:'POST',
             headers:{
+                'Accept': 'application/json',
                 'Content-Type':'application/json',
                 'Authorization':`Bearer ${token}`
             },
@@ -62,6 +63,7 @@ export const editTaskFunction=createAsyncThunk('taskSlice/editTask',async(task,t
         const response=await axios(`https://stage.api.sloovi.com/task/lead_465c14d0e99e4972b6b21ffecf3dd691/${task.task_id}?company_id=${company_id}`,{
             method:'PUT',
             headers:{
+                'Accept': 'application/json',
                 'Content-Type':'application/json',
                 'Authorization':`Bearer ${token}`
             },
@@ -89,6 +91,7 @@ export const deleteTask=createAsyncThunk('taskSlice/deleteTask',async(task,thunk
         const response=await axios(`https://stage.api.sloovi.com/task/lead_465c14d0e99e4972b6b21ffecf3dd691/${task.task_id}?company_id=${company_id}`,{
             method:'DELETE',
             headers:{
+                'Accept': 'application/json',
                 'Content-Type':'application/json',
                 'Authorization':`Bearer ${token}`
             }
