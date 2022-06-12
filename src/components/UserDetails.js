@@ -15,7 +15,7 @@ const UserDetails = () => {
             </span>
          </div> 
             {dropdownOpen && (
-                <div className="absolute mt-1 w-[300px] mx-auto h-[auto] left-0 right-0 shadow-xl z-[999] bg-white">
+                <div className="absolute mt-1 w-[300px] mx-auto h-[auto] left-0 right-0 shadow-xl z-[999] bg-white rounded-lg">
                    <div className="px-4 py-3 text-sm text-gray-900">
                          <div>
                               <span className="text-gray-900">
