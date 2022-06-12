@@ -10,19 +10,16 @@ import EditTask from './EditTask';
 
 const Tasks = () => {
     const singleTask = useSelector(state => state.task.singleTask)
-    // const user_picture=useSelector(state=>state.auth.user_picture)
-    console.log(singleTask);
+    const taskAssignee=useSelector(state=>state.auth.user_name)
     const  dispatch=useDispatch()
     const isloading=useSelector(state=>state.task.isloading)
     const  isTaskOpen=useSelector(state=>state.task.isTaskOpen)
     const [taskDescription, setTaskDescription] = useState("");
     const [taskDate, setTaskDate] = useState("");
     const [taskTime, setTaskTime] = useState("");
-    const [taskAssignee, setTaskAssignee] = useState("");
-    const [editTask, setEditTask] = useState("");
     const [active,setActive]=useState(false);
     const [activeIndex,setActiveIndex]=useState(0);
-   
+
     const getCurrentTimeZone = () => {
        return (Date.now()-(Date.now()/1000/60/60/24|0)*24*60*60*1000)/1000
     }
@@ -65,7 +62,7 @@ const Tasks = () => {
          <div className='text-center mt-5 mb-16'>
             <h1>Create New Task</h1>
          </div>
-         <div className={`task-header-plus-btn w-[350px] border-[0.5px] border-[lightgray] shadow-xl mx-auto`}>
+         <div className={`task-header-plus-btn w-[450px] border-[0.5px] border-[lightgray] shadow-xl mx-auto`}>
             <div className="task-header flex justify-between border-b-2">
                 <div className="task-number p-3">
                     <span className="task-number-text">
@@ -128,10 +125,9 @@ const Tasks = () => {
                     <label htmlFor="task-assignee" className='text-gray-700'>
                         Assigne User
                     </label>
-                    <input type="text" id="task-assignee" placeholder="Enter assignee name"
+                    <input type="text" id="task-assignee" 
                     className='w-full border-2 mt-3 p-2.5'
-                    value={taskAssignee}
-                    onChange={(e)=>setTaskAssignee(e.target.value)}
+                    defaultValue={taskAssignee}
                     />
                 </div>
                 <div className="submit-and-cancel-task w-full flex justify-end p-3">
@@ -162,41 +158,43 @@ const Tasks = () => {
        </div>
        <div className='my-10'>
               {
-                    singleTask.map((task,index)=>{
-                        return(
-                            <div className={"task-header-plus-btn w-[350px] border-[0.5px] border-[lightgray] shadow-xl mx-auto mt-5"} key={index}>
-                                <div className="task-header flex justify-between border-b-2">
-                                    <div className="task-number p-3">
-                                        <span className="task-number-text">
-                                           TASK
-                                        </span>
-                                        <span className='text-xl ml-3'>
-                                            {index+1}
-                                        </span>
-                                    </div>
-                                    <div className="plus border-l-2 p-3 flex justify-center items-center">
-                                        <AiOutlinePlus
-                                            className='text-xl cursor-pointer'
-                                            onClick={()=>{
-                                               
-                                            }
-                                            }
-                                        />
-                                    </div>
-                                    </div>
-                                   {activeIndex===index? 
-                                      (active && <EditTask/> 
-                                   ):""
-                                   }
-                                    {/* task  */}
-                                     <Task 
-                                        changeTab={changeTab}
-                                        task={task}
-                                        index={index}
-                                     />
-                                    </div>
-                        )
-                        
+              singleTask.map((task,index)=>{
+                    return(
+                        <div className={"task-header-plus-btn w-[450px] border-[0.5px] border-[lightgray] shadow-xl mx-auto mt-5"} key={index}>
+                            <div className="task-header flex justify-between border-b-2">
+                                <div className="task-number p-3">
+                                    <span className="task-number-text">
+                                        TASK
+                                    </span>
+                                    <span className='text-xl ml-3'>
+                                        {index+1}
+                                    </span>
+                                </div>
+                                <div className="plus border-l-2 p-3 flex justify-center items-center">
+                                    <AiOutlinePlus
+                                        className='text-xl cursor-pointer'
+                                        onClick={()=>{
+                                            
+                                        }
+                                        }
+                                    />
+                                </div>
+                                </div>
+                                {activeIndex===index? 
+                                    (active && <EditTask
+                                      task={task}
+                                    /> 
+                                ):""
+                                }
+                                {/* task  */}
+                                    <Task 
+                                    changeTab={changeTab}
+                                    task={task}
+                                    index={index}
+                                    />
+                                </div>
+                         )
+                                
                     })
                 }
               </div>

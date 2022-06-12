@@ -31,6 +31,7 @@ const authSlice = createSlice({
         isAuthenticated: false,
         message:null,
         user_id: null,
+        user_name:null,
         token: null,
         error: null,
         loading: false,
@@ -47,6 +48,7 @@ const authSlice = createSlice({
             state.loading = false;
             state.company_id = null;
             state.user_picture = null;
+            state.user_name=null
         },
          resetMessageState:(state)=>{
             state.message="";
@@ -64,6 +66,7 @@ const authSlice = createSlice({
             state.token = action.payload.results.token;
             state.company_id = action.payload.results.company_id;
             state.user_picture = action.payload.results.icon
+            state.user_name=action.payload.results.name
         },
         [loginUser.rejected]: (state, action) => {
             state.loading = false;

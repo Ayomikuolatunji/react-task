@@ -3,6 +3,11 @@ import { IoMdCheckmark } from 'react-icons/io'
 import { MdModeEditOutline, MdOutlineEditNotifications } from 'react-icons/md'
 
 const Task = ({changeTab,task,index}) => {
+      // const user_picture=useSelector(state=>state.auth.user_picture)
+
+
+
+      
   return (
     <div>
          {/* display task */}
