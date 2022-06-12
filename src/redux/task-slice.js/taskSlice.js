@@ -38,21 +38,25 @@ export const createTask=createAsyncThunk('taskSlice/createTask',async(task,thunk
 export const editTaskFunction=createAsyncThunk('taskSlice/editTask',async(task,thunkAPI)=>{
     try{
         console.log(task)
-        // const {company_id,token,user_id} = thunkAPI.getState().auth;
-        // const response=await axios(`https://stage.api.sloovi.com/task/${task.task_id}?company_id=${company_id}`,{
-        //     method:'PUT',
-        //     headers:{
-        //         'Content-Type':'application/json',
-        //         'Authorization':`Bearer ${token}`
-        //     },
-        //       data:JSON.stringify(
-        //         {
-        //          assigned_user: user_id, 
-        //          task_date:task.taskDate,
-        //     })
-        // })
+        const {company_id,token,user_id} = thunkAPI.getState().auth;
+        const response=await axios(`https://stage.api.sloovi.com/task/${task.task_id}?company_id=${company_id}`,{
+            method:'PUT',
+            headers:{
+                'Content-Type':'application/json',
+                'Authorization':`Bearer ${token}`
+            },
+              data:JSON.stringify(
+                {
+                 assigned_user: user_id, 
+                 task_date:task.task_date,
+                 task_time:task.taskTime,
+                 is_completed:1,
+                 time_zone:task.timeZone,
+                 task_msg: task.task_msg,
+            })
+        })
 
-        // return response.data;
+        return response.data;
     }catch(error){
         return thunkAPI.rejectWithValue(error)
     }

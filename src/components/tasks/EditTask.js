@@ -16,18 +16,17 @@ const EditTask = ({task,changeTab, index}) => {
 
 
     const editTaskHandler = () => {
-        if(!editDesc || !editDate || !editTime){
-            alert("Please fill all the fields")
-            return
-        }
-        changeTab(index)
+        // if(!editDesc || !editDate || !editTime){
+        //     alert("Please fill all the fields")
+        //     return
+        // }
+        // changeTab(index)
         disptach(editTaskFunction({
-            task_id:task.results.task_id,
+            task_id:task.results.id,
             task_msg:editDesc,
             task_date:editDate,
             timeTime:editTime,
             taskAssignee:taskAssignee,
-            is_completed:task.results.is_completed,
             timeZone: task.results.timeZone
         }))
     }
