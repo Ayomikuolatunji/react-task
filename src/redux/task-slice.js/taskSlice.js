@@ -5,9 +5,9 @@ import axios from "axios"
 
 export const getAllTasks = createAsyncThunk("task/getAllTasks", 
 async (_, thunkAPI) => {
-    const {company_id,token,user_id} = thunkAPI.getState().auth;
+    const {company_id,token} = thunkAPI.getState().auth;
     try {
-        const response = await axios.get("http://localhost:5000/api/tasks",{
+        const response = await axios.get(`https://stage.api.sloovi.com/task/lead_465c14d0e99e4972b6b21ffecf3dd691?company_id=${company_id}`,{
             method:"GET",
             headers:{
                 'Accept': 'application/json',
@@ -62,6 +62,7 @@ const taskSlice = createSlice({
         isTaskOpen:false,
         taskSucessMsg:"",
         isloading:false,
+        allTasks:[],
     },
     reducers: {
          setTaskOpen: (state, action) => {
@@ -78,6 +79,17 @@ const taskSlice = createSlice({
             state.isTaskOpen=false
         },
         [createTask.pending]: (state, action) => {
+            state.isloading = true
+        },
+        // dispatch(getAllTasks())
+        [getAllTasks.fulfilled]: (state, action) => {
+            state.allTasks = action.payload
+            state.isloading=false
+        },
+        [getAllTasks.rejected]: (state, action) => {
+            state.isloading=false
+        },
+        [getAllTasks.pending]: (state, action) => {
             state.isloading = true
         }
     }
