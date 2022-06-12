@@ -1,11 +1,14 @@
 import React, { useState } from 'react'
 import {AiOutlinePlus} from "react-icons/ai";
-import { useDispatch } from 'react-redux';
-import { createTask } from '../../redux/task-slice.js/taskSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { createTask, setTaskOpen } from '../../redux/task-slice.js/taskSlice';
+import AllTask from './AllTask';
 
 const Task = () => {
-   const  dispatch=useDispatch()
-   const [openTask, setOpenTask] = useState(false);
+
+    const  dispatch=useDispatch()
+    const isloading=useSelector(state=>state.task.isloading)
+    const  isTaskOpen=useSelector(state=>state.task.isTaskOpen)
     const [taskDescription, setTaskDescription] = useState("");
     const [taskDate, setTaskDate] = useState("");
     const [taskTime, setTaskTime] = useState("");
@@ -26,7 +29,10 @@ const Task = () => {
 
 
    const handleOpenTask = () => {
-        setOpenTask(true);
+        if(!taskDate || !taskTime || !taskAssignee || !taskDescription){
+            alert("Please fill all the fields")
+            return
+        }
         dispatch(createTask({
             taskDescription: taskDescription,
             taskDate: taskDate,
@@ -54,12 +60,14 @@ const Task = () => {
                 </div>
                 <div className="plus border-l-2 p-3 flex justify-center items-center">
                     <AiOutlinePlus
-                        className='text-xl'
-                        onClick={()=>setOpenTask(!openTask)}
+                        className='text-xl cursor-pointer'
+                        onClick={()=>{
+                            dispatch(setTaskOpen(!isTaskOpen))
+                        }}
                     />
                 </div>
              </div>
-            {openTask && <div className="task-form w-full bg-blue-200">
+            {isTaskOpen && <div className="task-form w-full bg-blue-200">
                 <div className="task-description w-full flex flex-col justify-center p-2  mt-4">
                     <label htmlFor="task description">
                         Task Description
@@ -111,17 +119,30 @@ const Task = () => {
                 </div>
                 <div className="submit-and-cancel-task w-full flex justify-end p-3">
                     <button className="cancel-task-btn mr-3 px-5 py-2  text-gray-500"
-                    onClick={()=>setOpenTask(!openTask)}
+                    onClick={()=>{
+                        dispatch(setTaskOpen(false))
+                    }}
                     >
                       Cancel
                     </button>
                     <button className="submit-task-btn mr-3 px-5 py-2 bg-green-700 text-white"
                     onClick={handleOpenTask}
                     >
-                        Submit
+                       {
+                        isloading? 
+                        <span>
+                            please wait...
+                        </span>: 
+                        <span>
+                            Submit
+                        </span>
+
+                       }
                     </button>
                  </div>
              </div>}
+             {/* display all tasks */}
+             <AllTask/>
          </div>
     </div>
   )

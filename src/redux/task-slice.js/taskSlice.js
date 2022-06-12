@@ -3,8 +3,27 @@ import axios from "axios"
 
 
 
+export const getAllTasks = createAsyncThunk("task/getAllTasks", 
+async (_, thunkAPI) => {
+    const {company_id,token,user_id} = thunkAPI.getState().auth;
+    try {
+        const response = await axios.get("http://localhost:5000/api/tasks",{
+            method:"GET",
+            headers:{
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',  
+                "Authorization":`Bearer ${token}`
+            }
+        })
+        return response.data
+    } catch (error) {
+        console.log(error);
+         return thunkAPI.rejectWithValue(error)
+    }
+})
+
+
 export const createTask=createAsyncThunk('taskSlice/createTask',async(task,thunkAPI)=>{
-    console.log(task)
     try{
         const {company_id,token,user_id} = thunkAPI.getState().auth;
         const response=await axios(`https://stage.api.sloovi.com/task/lead_465c14d0e99e4972b6b21ffecf3dd691?company_id=${company_id}`,{
@@ -40,11 +59,14 @@ export const createTask=createAsyncThunk('taskSlice/createTask',async(task,thunk
 const taskSlice = createSlice({
     name: "task",
     initialState: {
+        isTaskOpen:false,
         taskSucessMsg:"",
         isloading:false,
     },
     reducers: {
-         
+         setTaskOpen: (state, action) => {
+            state.isTaskOpen = action.payload;
+         }
     },
     extraReducers: {
         [createTask.fulfilled]: (state, action) => {
@@ -53,6 +75,7 @@ const taskSlice = createSlice({
         [createTask.rejected]: (state, action) => {
             state.taskSucessMsg = action.payload
             state.isloading=false
+            state.isTaskOpen=false
         },
         [createTask.pending]: (state, action) => {
             state.isloading = true
@@ -61,7 +84,6 @@ const taskSlice = createSlice({
 
 })
 
-
-export const {} = taskSlice.actions
+export const {setTaskOpen} = taskSlice.actions;
 
 export default taskSlice.reducer

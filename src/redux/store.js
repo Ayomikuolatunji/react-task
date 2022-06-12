@@ -10,7 +10,8 @@ import userDetailsSlice from './user-slice/userDetailsSlice';
 
 const persistConfig = {
     key: 'userCredentials',
-    storage
+    storage,
+    blacklist: ['task']
 }
 // first reducer setup for persist storage blacklisting country and companies
 const rootReducer= combineReducers({
