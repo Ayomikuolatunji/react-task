@@ -37,19 +37,33 @@ const Task = () => {
                       className='w-full border-2 mt-3 p-2.5'
                     />
                 </div>
-                <div className="task-date-and-time">
-                    <div className="task-date">
-                        <label htmlFor="task-date">
+                <div className="task-date-and-time w-full  p-3 flex ">
+                    <div className="task-date w-[45%]">
+                        <label htmlFor="task-date" className='text-gray-700'>
                             Task Date
                         </label>
-                        <input type="date" id="task-date"/>
+                        <input type="date" id="task-date"
+                          className='w-full border-2 mt-3 '
+                        />
                      </div>
-                      <div className="task-time">
-                        <label htmlFor="task-time">
+                      <div className="task-time w-[50%] flex justify-center flex-col ml-5">
+                        <label htmlFor="task-time"
+                         className='text-gray-700'
+                        >
                             Task Time
                         </label>
-                        <input type="time" id="task-time"/>
+                        <input type="time" id="task-time"
+                          className='w-full border-2 mt-3'
+                        />
                       </div>
+                </div>
+                <div className="task-assignee p-3">
+                    <label htmlFor="task-assignee" className='text-gray-700'>
+                        Assigne User
+                    </label>
+                    <input type="text" id="task-assignee" placeholder="Enter assignee name"
+                    className='w-full border-2 mt-3 p-2.5'
+                    />
                 </div>
              </div>
          </div>
