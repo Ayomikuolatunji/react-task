@@ -11,7 +11,6 @@ import EditTask from './EditTask';
 const Tasks = () => {
     const singleTask = useSelector(state => state.task.singleTask)
     const taskAssignee=useSelector(state=>state.auth.user_name)
-    
     const  dispatch=useDispatch()
     const isloading=useSelector(state=>state.task.isloading)
     const  isTaskOpen=useSelector(state=>state.task.isTaskOpen)
@@ -56,7 +55,6 @@ const Tasks = () => {
             is_completed:Math.floor(Math.random()*2),
             timeZone:  Math.floor(getCurrentTimeZone())
         }))
-        setTaskDescription("")
    }
 
   return (
