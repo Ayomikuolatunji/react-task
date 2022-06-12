@@ -141,7 +141,7 @@ const Task = () => {
                     </button>
                  </div>
              </div>}
-             {/* display all tasks */}
+             {/* display all  */}
              <AllTask/>
          </div>
     </div>

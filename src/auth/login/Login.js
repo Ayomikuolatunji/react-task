@@ -63,7 +63,9 @@ const Login = () => {
                  className="login-button bg-[blue] hover:bg-blue-600 text-white font-bold py-4 px-3 mt-12 block w-full" 
                  type='submit'>
                    {
-                        loading? <span className='text-white'>Loading...</span> :
+                        loading? 
+                        <span className='text-white'>please wait...</span>
+                         :
                         <span className='text-white'>Login</span>
                    }
                  </button>

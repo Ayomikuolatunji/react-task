@@ -34,6 +34,7 @@ const authSlice = createSlice({
         error: null,
         loading: false,
         company_id: null,
+        user_picture: null,
     },
     reducers: {
         logout: (state) => {
@@ -44,6 +45,7 @@ const authSlice = createSlice({
             state.error = null;
             state.loading = false;
             state.company_id = null;
+            state.user_picture = null;
         },
          resetMessageState:(state)=>{
             state.message="";
@@ -60,6 +62,7 @@ const authSlice = createSlice({
             state.user_id = action.payload.results.user_id;
             state.token = action.payload.results.token;
             state.company_id = action.payload.results.company_id;
+            state.user_picture = action.payload.results.icon
         },
         [loginUser.rejected]: (state, action) => {
             state.loading = false;
