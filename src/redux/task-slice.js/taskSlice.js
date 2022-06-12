@@ -75,7 +75,7 @@ export const editTaskFunction=createAsyncThunk('taskSlice/editTask',async(task,t
                  task_msg: task.task_msg,
             })
         })
-        console.log(response.data)
+        // console.log(response.data)
         return response.data;
     }catch(error){
         return thunkAPI.rejectWithValue(error)
@@ -93,7 +93,7 @@ export const deleteTask=createAsyncThunk('taskSlice/deleteTask',async(task,thunk
                 'Authorization':`Bearer ${token}`
             }
         })
-        console.log(response.data)
+        // console.log(response.data)
         return response.data;
     }catch(error){
         return thunkAPI.rejectWithValue(error)
