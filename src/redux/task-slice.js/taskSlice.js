@@ -35,6 +35,29 @@ export const createTask=createAsyncThunk('taskSlice/createTask',async(task,thunk
 
 
 
+export const editTaskFunction=createAsyncThunk('taskSlice/editTask',async(task,thunkAPI)=>{
+    try{
+        console.log(task)
+        // const {company_id,token,user_id} = thunkAPI.getState().auth;
+        // const response=await axios(`https://stage.api.sloovi.com/task/${task.task_id}?company_id=${company_id}`,{
+        //     method:'PUT',
+        //     headers:{
+        //         'Content-Type':'application/json',
+        //         'Authorization':`Bearer ${token}`
+        //     },
+        //       data:JSON.stringify(
+        //         {
+        //          assigned_user: user_id, 
+        //          task_date:task.taskDate,
+        //     })
+        // })
+
+        // return response.data;
+    }catch(error){
+        return thunkAPI.rejectWithValue(error)
+    }
+})
+
 
 const taskSlice = createSlice({
     name: "task",
@@ -54,7 +77,6 @@ const taskSlice = createSlice({
     },
     extraReducers: {
         [createTask.fulfilled]: (state, action) => {
-            console.log(action);
             state.taskSucessMsg =" action.payload"
             state.isloading=false
             state.isTaskOpen=false

@@ -43,10 +43,10 @@ const Tasks = () => {
       };
 
    const handleOpenTask = () => {
-        // if(!taskDate || !taskTime || !taskAssignee || !taskDescription){
-        //     alert("Please fill all the fields")
-        //     return
-        // }
+        if(!taskDate || !taskTime || !taskAssignee || !taskDescription){
+            alert("Please fill all the fields")
+            return
+        }
         dispatch(createTask({
             taskDescription: taskDescription,
             taskDate: taskDate,
@@ -55,6 +55,7 @@ const Tasks = () => {
             is_completed:Math.floor(Math.random()*2),
             timeZone:  Math.floor(getCurrentTimeZone())
         }))
+        setTaskDescription("")
    }
 
   return (
@@ -182,6 +183,8 @@ const Tasks = () => {
                                 </div>
                                 {activeIndex===index? 
                                     (active && <EditTask
+                                      index={index}
+                                      changeTab={changeTab}
                                       task={task}
                                     /> 
                                 ):""
@@ -190,6 +193,7 @@ const Tasks = () => {
                                     <Task 
                                     changeTab={changeTab}
                                     task={task}
+                                    active={active}
                                     index={index}
                                     />
                                 </div>

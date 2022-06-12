@@ -1,19 +1,36 @@
 import React,{useState} from 'react'
 import {BsFillTrashFill} from 'react-icons/bs'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { editTaskFunction } from '../../redux/task-slice.js/taskSlice'
 
 
 
-const EditTask = ({task}) => {
+const EditTask = ({task,changeTab, index}) => {
+    const disptach=useDispatch()
     const [editDesc,setEditDesc]=useState(task.results.task_msg)
     const taskAssignee=useSelector(state=>state.auth.user_name)
     const [editDate,setEditDate]=useState("")
     const [editTime,setEdit]=useState("")
     
 
-    console.log(task)
 
 
+    const editTaskHandler = () => {
+        if(!editDesc || !editDate || !editTime){
+            alert("Please fill all the fields")
+            return
+        }
+        changeTab(index)
+        disptach(editTaskFunction({
+            task_id:task.results.task_id,
+            task_msg:editDesc,
+            task_date:editDate,
+            timeTime:editTime,
+            taskAssignee:taskAssignee,
+            is_completed:task.results.is_completed,
+            timeZone: task.results.timeZone
+        }))
+    }
 
   return (
     <div className={`task-form w-full bg-blue-200 mt-5`}>
@@ -37,7 +54,8 @@ const EditTask = ({task}) => {
             </label>
             <input type="date" id="task-date"
             className='w-full border-2 mt-3'   
-               
+               value={editDate}
+                onChange={(e)=>setEditDate(e.target.value)}
             />
             </div>
             <div className="task-time w-[50%] flex justify-center flex-col ml-5">
@@ -49,7 +67,8 @@ const EditTask = ({task}) => {
             </label>
             <input type="time" id="task-time"
             className='w-full border-2 mt-3'
-            
+              value={editTime}
+                onChange={(e)=>setEdit(e.target.value)}
             />
             </div>
         </div>
@@ -68,12 +87,12 @@ const EditTask = ({task}) => {
             </button>
             <div>
             <button className="cancel-task-btn mr-3 px-5 py-2  text-gray-500"
-                
+                  onClick={()=>changeTab(index)}
                 >
-                    Cancel
+                  Cancel
                 </button>
                 <button className="submit-task-btn mr-3 px-5 py-2 bg-green-700 text-white"
-                
+                onClick={editTaskHandler}
                 >
                     Edit
                 </button>
